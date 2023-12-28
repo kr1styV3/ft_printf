@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printfbinary.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chrlomba <chrlomba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/08 18:04:31 by chrlomba          #+#    #+#             */
-/*   Updated: 2023/12/28 18:11:52 by chrlomba         ###   ########.fr       */
+/*   Created: 2023/12/28 17:40:46 by chrlomba          #+#    #+#             */
+/*   Updated: 2023/12/28 18:12:53 by chrlomba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <stdarg.h>
-# include <unistd.h>
-# include <stddef.h>
+void	hex_conversion(unsigned long n, int *out, char *base)
+{
+	if (n >= 16)
+		hex_conversion(n / 16, out, base);
+	ft_putchar(base[n % 16], out);
+}
 
-void	ft_putchar(char c, int *out);
-void	ft_putstr(char *str, int *out);
-int		ft_printf(const char *format, ...);
-void	hex_conversion(unsigned long n, int *out, char *base);
-void	point_conversion(void *ptr, int *out);
-#endif
+void	point_conversion(void *ptr, int *out)
+{
+	unsigned long	address;
+	char			*base;
+
+	address = (unsigned long)ptr;
+	base = "0123456789abcdef";
+	ft_putstr("0x", out);
+	hex_conversion(address, out, base);
+}
