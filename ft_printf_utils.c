@@ -6,7 +6,7 @@
 /*   By: chrlomba <chrlomba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 18:04:06 by chrlomba          #+#    #+#             */
-/*   Updated: 2023/12/09 13:45:44 by chrlomba         ###   ########.fr       */
+/*   Updated: 2023/12/28 17:27:53 by chrlomba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void	ft_putstr(char *str, int *out)
 		i++;
 	}
 }
+	//	TODO
+// void	ft_putnbr(int n, int *out)
+// {
+// 	int	nl;
 
-void	ft_putnbr(int n, int *out)
-{
-	int	nl;
-
-	nl = n;
-	if (nl < 0)
-		nl *= -1;
-	if (nl > 
-}
+// 	nl = n;
+// 	if (nl < 0)
+// 		nl *= -1;
+// 	if (nl > 
+// }
