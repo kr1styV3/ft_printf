@@ -9,9 +9,42 @@
 /*   Updated: 2023/11/29 01:36:46 by olramazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include <unistd.h>
 #include <stddef.h>
+#include "ft_printf.h"
 
+void	ft_putnbr_out(int n, int *out)
+{
+	if (out == NULL)
+		return ;
+	if (n == -2147483648)
+	{
+		ft_putstr_out("-2147483648", out);
+		return ;
+	}
+	if (n < 0)
+	{
+		ft_putchar_out('-', out);
+		n = -n;
+	}
+	if (n >= 10)
+	{
+		ft_putnbr_out(n / 10, out);
+	}
+	ft_putchar_out((n % 10) + '0', out);
+}
+
+void	ft_unsigned_putnbr_out(unsigned int n, int *out)
+{
+	if (out == NULL)
+		return ;
+	if (n >= 10)
+	{
+		ft_putnbr_out(n / 10, out);
+	}
+	ft_putchar_out((n % 10) + '0', out);
+}
 // int main()
 // {
 //     // Example usage of ft_putnbr_fd to print different numbers to stdout
