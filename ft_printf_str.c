@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_str.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chrlomba <chrlomba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olramazz <olramazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 18:04:06 by chrlomba          #+#    #+#             */
-/*   Updated: 2023/12/29 19:47:36 by chrlomba         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:35:39 by olramazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_putstr_out(char *str, int *out)
 
 	i = 0;
 	if (str == NULL)
-		return ;
+		return (ft_putstr_out("(null)", out));
 	while (str[i] != '\0')
 	{
 		ft_putchar_out(str[i], out);

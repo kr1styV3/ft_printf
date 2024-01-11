@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chrlomba <chrlomba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olramazz <olramazz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/08 17:42:32 by chrlomba          #+#    #+#             */
-/*   Updated: 2023/12/29 19:47:35 by chrlomba         ###   ########.fr       */
+/*   Created: 2024/01/10 17:04:30 by olramazz          #+#    #+#             */
+/*   Updated: 2024/01/10 17:21:16 by olramazz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
+#include <limits.h>
 
 int	check_format(char id, int *out, va_list ap)
 {
@@ -26,19 +27,22 @@ int	check_format(char id, int *out, va_list ap)
 	else if (id == 'u')
 		ft_unsigned_putnbr_out(va_arg(ap, unsigned int), out);
 	else if (id == 'x')
-		hex_conversion(va_arg(ap, unsigned long), out, "0123456789abcdef");
+		hex_conversion(va_arg(ap, unsigned int), out, "0123456789abcdef");
 	else if (id == 'X')
-		hex_conversion(va_arg(ap, unsigned long), out, "0123456789ABCDEF");
+		hex_conversion(va_arg(ap, unsigned int), out, "0123456789ABCDEF");
 	else if (id == '%')
 		ft_putchar_out('%', out);
-	return (2);
+	else
+		return (-1);
+	return (1);
 }
 
 int	ft_printf(const char *format, ...)
 {
-	int			out;
-	int			i;
-	va_list		ap;
+	int		out;
+	int		i;
+	int		check;
+	va_list	ap;
 
 	i = 0;
 	out = 0;
@@ -46,9 +50,17 @@ int	ft_printf(const char *format, ...)
 	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
-			i += check_format(format[i + 1], &out, ap);
-		ft_putchar_out(format[i], &out);
-		i++;
+		{
+			check = check_format(format[i + 1], &out, ap);
+			if (check == -1)
+				return (out);
+			i += check + 1;
+		}
+		else
+		{
+			ft_putchar_out(format[i], &out);
+			i++;
+		}
 	}
 	va_end(ap);
 	return (out);
@@ -56,12 +68,9 @@ int	ft_printf(const char *format, ...)
 
 // int	main(void)
 // {
-// 	unsigned long	res;
-// 	char	*memory;
+// 	unsigned long	memory;
 
-// 	memory = "memory";
-
-// 	res = printf("ciao funzioni da, %p\n", memory);
-// 	printf("i caraterri stampati sono %li", res);
+// 	memory = ULONG_MAX;
+// 	printf("ciao funzioni da, %p %i\n", memory, 42);
 // 	return (0);
 // }
